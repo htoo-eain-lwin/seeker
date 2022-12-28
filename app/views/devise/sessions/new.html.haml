@@ -1,0 +1,37 @@
+.row.flex-center.py-5
+  .col-sm-10.col-md-8.col-lg-5.col-xl-4
+    .d-flex.flex-center.mb-4
+      = image_tag('logo-rect.jpg')
+    .card
+      .card-body
+        .row.justify-content-center
+          .mb-3
+            %h5.mb-3 Log In
+            = simple_form_for resource, url: session_path(resource_name) do |f|
+              = render partial: 'devise/shared/error_messages', resource: resource
+              .form-group.mb-3
+                = f.input :email,
+                          autofocus: true,
+                          label: false,
+                          placeholder: 'Email',
+                          autocomplete: "email",
+                          autofocus: true,
+                          class: 'form-control'
+              .form-group.mb-3
+                = f.input :password,
+                          label: false,
+                          placeholder: 'Password',
+                          autocomplete: "current-password",
+                          class: 'form-control'
+
+                - if devise_mapping.rememberable?
+                  .row
+                    .d-flex.justify-content-between
+                      .col-auto
+                        = f.check_box :remember_me
+                        = f.label :remember_me
+                      .col-auto
+                        = render "devise/shared/links"
+
+              .actions
+                = f.submit "Log in", class: 'btn btn-primary d-block w-100 mt-3'
