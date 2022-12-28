@@ -5,19 +5,17 @@ default: &default
 
 development:
   <<: *default
-  host:     <%= ENV['DB_HOST'] %>
-  port:     <%= ENV['DB_PORT'] %>
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  database: <%= ENV['DB_NAME'] %>_development
+  host:     localhost
+  username: postgres
+  password:
+  database: seeker_development
 
 test:
   <<: *default
-  host:     <%= ENV['DB_HOST'] %>
-  port:     <%= ENV['DB_PORT'] %>
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  database: <%= ENV['DB_NAME'] %>_test
+  host:     localhost
+  username: postgres
+  password:
+  database: seeker_test
 
 production:
   url: <%= ENV['DATABASE_URL'] %>
