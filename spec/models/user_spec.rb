@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validations' do
+    # Here we're using FactoryBot, but you could use anything
+    subject { Fabricate.build(:user) }
+
+    it { should validate_presence_of(:email) }
+  end
 end
