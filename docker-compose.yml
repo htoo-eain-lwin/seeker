@@ -1,0 +1,50 @@
+version: '3.2'
+
+services:
+  db:
+    image: postgres:14.4
+    container_name: seeker_db
+    environment:
+      - POSTGRES_DB=seeker_production
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:6.2.7
+    container_name: seeker_redis
+    ports:
+      - "6379:6379"
+
+  web:
+    build:
+      context: .
+      cache_from:
+        - ${DOCKER_REGISTRY_HOST}/${DOCKER_IMAGE}:${BRANCH_TAG}
+      args:
+        - BUILD_ENV=production
+        - RUBY_ENV=production
+        - NODE_ENV=production
+        - ASSET_HOST
+    image: ${DOCKER_REGISTRY_HOST}/${DOCKER_IMAGE}:${BRANCH_TAG}
+    container_name: seeker_web
+    command: bin/start.sh
+    ports:
+      - "${PORT}:${PORT}"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    volumes:
+      - "ruby-bundle:/bundle"
+    environment:
+      - RACK_ENV=production
+      - RAILS_ENV=production
+      - NODE_ENV=production
+      - DATABASE_URL=postgres://postgres@db/seeker_production
+      - ASSET_HOST
+      - DEFAULT_HOST
+      - MAILER_SENDER
+      - RAILS_MASTER_KEY
+
+volumes:
+  ruby-bundle:
