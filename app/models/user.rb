@@ -7,4 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :email, presence: true
+
+  has_many :searches, dependent: :destroy
+  has_many :keywords, through: :searches
 end

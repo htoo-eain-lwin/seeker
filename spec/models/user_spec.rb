@@ -3,10 +3,18 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'validations' do
-    # Here we're using FactoryBot, but you could use anything
-    subject { Fabricate.build(:user) }
+  describe 'Fabricate' do
+    it 'have valid factory' do
+      expect { Fabricate.create :user }.not_to raise_error
+    end
+  end
 
+  describe 'validations' do
     it { is_expected.to validate_presence_of(:email) }
+  end
+
+  describe 'associations' do
+    it { is_expected.to have_many(:keywords).through(:searches) }
+    it { is_expected.to have_many(:searches) }
   end
 end
