@@ -9,5 +9,6 @@ class User < ApplicationRecord
   validates :email, presence: true
 
   has_many :searches, dependent: :destroy
-  has_many :keywords, through: :searches
+  has_many :keyword_users, dependent: :destroy
+  has_many :keywords, through: :keyword_users
 end

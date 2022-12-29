@@ -15,7 +15,7 @@ describe HomeController, type: :controller do
       it 'redirect to dashboard index' do
         login_user
         get :index
-        expect(response).to redirect_to(dashboard_index_path)
+        expect(response).to redirect_to(dashboard_path)
       end
     end
   end

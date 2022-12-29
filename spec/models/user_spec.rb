@@ -14,7 +14,8 @@ RSpec.describe User, type: :model do
   end
 
   describe 'associations' do
-    it { is_expected.to have_many(:keywords).through(:searches) }
+    it { is_expected.to have_many(:keyword_users) }
+    it { is_expected.to have_many(:keywords).through(:keyword_users) }
     it { is_expected.to have_many(:searches) }
   end
 end
