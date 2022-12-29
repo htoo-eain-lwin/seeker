@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '3.0.1'
 
 # Backend
-gem 'rails', '7.0.1' # Latest stable
+gem 'rails', '7.0.2' # Latest stable
 gem 'pg' # Use Postgresql as database
 gem 'puma' # Use Puma as the app server
 gem 'mini_magick' # A ruby wrapper for ImageMagick or GraphicsMagick command line
@@ -15,6 +15,7 @@ gem 'mechanize'
 gem 'haml-rails'
 gem 'simple_form'
 gem 'turbo-rails'
+gem 'stimulus-rails'
 # gem 'jbuilder' # Build JSON APIs with ease
 gem 'redis' # Use Redis adapter to run Action Cable in production
 # gem 'kredis' # Use Kredis to get higher-level data types in Redis
