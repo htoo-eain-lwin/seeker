@@ -14,8 +14,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows doe
 gem 'mechanize'
 gem 'haml-rails'
 gem 'simple_form'
+gem 'turbo-rails'
 # gem 'jbuilder' # Build JSON APIs with ease
-# gem 'redis' # Use Redis adapter to run Action Cable in production
+gem 'redis' # Use Redis adapter to run Action Cable in production
 # gem 'kredis' # Use Kredis to get higher-level data types in Redis
 # gem 'bcrypt' # Use Active Model has_secure_password
 
