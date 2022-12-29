@@ -1,0 +1,41 @@
+.row.flex-center.py-5
+  .col-sm-10.col-md-8.col-lg-5.col-xl-4
+    .d-flex.flex-center.mb-4
+      = image_tag('logo-rect.jpg')
+    .card
+      .card-body
+        .row
+          .row.mb-3.flex-between-center
+            .col-auto
+              %h5 Register
+            .col-auto
+              %span or
+              %span
+                = link_to "Sign In Here",
+                  new_session_path(resource_name)
+        = simple_form_for resource,
+                          url: registration_path(resource_name),
+                          data: { turbo: false }  do |f|
+          = render "devise/shared/error_messages", resource: resource
+          .form-group.mb-3
+            = f.input :email,
+                      autofocus: true,
+                      autocomplete: "email",
+                      placeholder: 'Email',
+                      label: false,
+                      class: 'form-control'
+          .form-group.mb-3
+            = f.input :password,
+                      autocomplete: 'new-password',
+                      placeholder: 'Password',
+                      label: false,
+                      class: 'form-control'
+          .form-group.mb-3
+            = f.input :password_confirmation,
+                      autocomplete: 'new-password',
+                      label: false,
+                      placeholder: 'Password Confirmation',
+                      class: 'form-control'
+          .form-group.mb-3
+            = f.submit "Sign up", class: 'btn btn-primary d-block w-100 mt-3'
+          = render "devise/shared/links"
