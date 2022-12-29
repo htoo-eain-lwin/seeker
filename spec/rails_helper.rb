@@ -20,6 +20,7 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
 
+  config.include ControllerMacros, type: :controller
   config.include Rails.application.routes.url_helpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include(Shoulda::Matchers::ActiveModel, type: :model)
