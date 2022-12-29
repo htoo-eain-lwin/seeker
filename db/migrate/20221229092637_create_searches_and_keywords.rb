@@ -7,7 +7,6 @@ class CreateSearchesAndKeywords < ActiveRecord::Migration[7.0]
 
     create_table :searches do |t|
       t.belongs_to :user
-      t.belongs_to :keyword
       t.timestamps
     end
   end
