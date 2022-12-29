@@ -138,6 +138,19 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.16.12.tgz#31197bb509049b63c059c4808ac58e66fdff7479"
   integrity sha512-iPYKN78t3op2+erv2frW568j1q0RpqX6JOLZ7oPPaAV1VaF7dDstOrNw37PVOYoTWE11pV4A1XUitpdEFNIsPg==
 
+"@hotwired/turbo-rails@7.2.4":
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-7.2.4.tgz#d155533e79c4ebdac23e8fe12697d821d5c06307"
+  integrity sha512-givDUQqaccd19BvErz1Cf2j6MXF74m0G6I75oqFJGeXAa7vwkz9nDplefVNrALCR9Xi9j9gy32xmSI6wD0tZyA==
+  dependencies:
+    "@hotwired/turbo" "^7.2.4"
+    "@rails/actioncable" "^7.0"
+
+"@hotwired/turbo@^7.2.4":
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.2.4.tgz#0d35541be32cfae3b4f78c6ab9138f5b21f28a21"
+  integrity sha512-c3xlOroHp/cCZHDOuLp6uzQYEbvXBUVaal0puXoGJ9M8L/KHwZ3hQozD4dVeSN9msHWLxxtmPT1TlCN7gFhj4w==
+
 "@nimblehq/eslint-config-nimble@2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@nimblehq/eslint-config-nimble/-/eslint-config-nimble-2.2.1.tgz#99acab175523d72f089b5a7deda13202408357d6"
@@ -170,6 +183,11 @@
   version "2.11.2"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.2.tgz#830beaec4b4091a9e9398ac50f865ddea52186b9"
   integrity sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==
+
+"@rails/actioncable@^7.0":
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.0.4.tgz#70a3ca56809f7aaabb80af2f9c01ae51e1a8ed41"
+  integrity sha512-tz4oM+Zn9CYsvtyicsa/AwzKZKL+ITHWkhiu7x+xF77clh2b4Rm+s6xnOgY/sGDWoFWZmtKsE95hxBPkgQQNnQ==
 
 "@types/minimist@^1.2.0":
   version "1.2.2"
