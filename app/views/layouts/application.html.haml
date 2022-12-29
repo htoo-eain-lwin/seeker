@@ -1,0 +1,23 @@
+!!!
+%html{lang: "#{I18n.locale}"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Seeker
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+  %body{ class: "#{controller_name} #{action_name} bg-light" }
+    %main#top.main
+      .container-xxl
+        %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+          .container-fluid
+            = link_to 'Seeker', '#', class: 'navbar-brand'
+            .d-flex
+              - if current_user
+                %a{ href: destroy_user_session_path, 'data-turbo-method' => 'delete' } Logout
+              - else
+                %a.me-3{ href: new_user_registration_path } Register
+                %a.me-3{ href: new_user_session_path } Log In
+        = yield
