@@ -1,0 +1,23 @@
+.row.d-flex.justify-content-center.py-5
+  .col-12.col-md-8
+    .card
+      .card-body
+        .card-title Upload File
+        = form_with(model: @search, url: upload_search_index_path, local: true) do |form|
+          .mb-3
+            .dropzone.dz-clickable{ 'data-controller': 'dropzone',
+                                    'data-dropzone-max-file-size': Search::MAX_SIZE,
+                                    'data-dropzone-max-files': 1 }
+              = form.file_field :csv_file,
+                                name: 'search[csv_file]',
+                                direct_upload: true,
+                                data: { dropzone_target: 'input' }
+              .dz-message{ data: { dz_message: 'data-dz-message' } }
+                %h3.dropzone-msg-title
+                  %i.fa.fa-cloud-upload-alt
+                  Drag here to upload or click here to browse
+                %span.dropzone-msg-desc.text-sm
+                  #{Search::MAX_SIZE} MB file size maximum. Allowed only file type csv.
+          .mb-3
+            = form.submit value: 'Submit', class: 'btn btn-primary'
+
