@@ -3,12 +3,17 @@
 class KeywordsController < ApplicationController
   def create
     @keyword = Keyword.new(keyword_params)
-    redirect_to result_keyword_path(@keyword.name) if @keyword.save
+    if @keyword.save
+      redirect_to result_keyword_path(@keyword.name)
+    else
+      redirect_back_or_to dashboard_path
+    end
   end
 
   def result
-    @keyword = Keyword.find_by name: params[:id]
-    CreateResultService.call(@keyword)
+    keyword = Keyword.find_by name: params[:id]
+    CreateResultService.call(keyword)
+    @result = Result.find_by keyword_id: keyword
   end
 
   private
