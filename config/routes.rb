@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'proxy', to: 'proxy#index'
   get 'keywords/create'
   get 'keyword/create'
   get 'dashboard', to: 'dashboard#index'
