@@ -4,7 +4,11 @@ require 'rails_helper'
 
 RSpec.describe Search, type: :model do
   describe 'valid factory' do
+    it 'have valid factory' do
+      expect { Fabricate.create :search }.not_to raise_error
+    end
   end
+
   describe 'associations' do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to validate_attached_of(:csv_file) }

@@ -8,7 +8,7 @@ class KeywordsController < ApplicationController
 
   def result
     @keyword = Keyword.find_by name: params[:id]
-    KeywordReportService.call(@keyword)
+    CreateResultService.call(@keyword)
   end
 
   private
