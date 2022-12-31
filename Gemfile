@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '3.0.1'
 
 # Backend
-gem 'rails', '7.0.1' # Latest stable
+gem 'rails', '7.0.2' # Latest stable
 gem 'pg' # Use Postgresql as database
 gem 'puma' # Use Puma as the app server
 gem 'mini_magick' # A ruby wrapper for ImageMagick or GraphicsMagick command line
@@ -11,10 +11,14 @@ gem 'discard' # Soft deletes for ActiveRecord
 gem 'sidekiq' # background processing for Ruby
 gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'mechanize'
 gem 'haml-rails'
 gem 'simple_form'
 gem 'turbo-rails'
+gem 'stimulus-rails'
+gem 'ferrum'
+gem 'active_storage_validations'
+
+
 # gem 'jbuilder' # Build JSON APIs with ease
 gem 'redis' # Use Redis adapter to run Action Cable in production
 # gem 'kredis' # Use Kredis to get higher-level data types in Redis
@@ -88,7 +92,6 @@ end
 group :test do
   gem 'rspec-retry' # Retry randomly failing rspec example.
   gem 'capybara' # Integration testing
-  gem 'selenium-webdriver' # Ruby bindings for Selenium/WebDriver
   gem 'webdrivers' # Run Selenium tests more easily with automatic installation and updates for all supported webdrivers
   gem 'database_cleaner' # Use Database Cleaner
   gem 'shoulda-matchers' # Tests common Rails functionalities

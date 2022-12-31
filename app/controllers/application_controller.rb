@@ -3,6 +3,6 @@
 class ApplicationController < ActionController::Base
   include Localization
   def after_sign_in_path_for(_resource)
-    dashboard_index_path
+    dashboard_path
   end
 end

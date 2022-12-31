@@ -3,6 +3,6 @@
 class Keyword < ApplicationRecord
   validates :name, presence: true
 
-  has_many :searches, dependent: :destroy
-  has_many :users, through: :searches
+  has_many :keyword_users, dependent: :destroy
+  has_many :users, through: :keyword_users
 end
