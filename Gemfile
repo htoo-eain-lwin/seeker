@@ -15,8 +15,9 @@ gem 'haml-rails'
 gem 'simple_form'
 gem 'turbo-rails'
 gem 'stimulus-rails'
-gem 'ferrum'
-gem 'active_storage_validations'
+gem 'ferrum' #Ferrum::Browser to crawl url
+gem 'active_storage_validations' # ActiveStorage Validator
+gem "chartkick" # Create beautiful JavaScript charts with one line of Ruby
 
 
 # gem 'jbuilder' # Build JSON APIs with ease
