@@ -9,6 +9,11 @@ RSpec.describe Keyword, type: :model do
     end
   end
 
+  describe 'validation' do
+    it { should validate_presence_of(:name) }
+    it { should validate_uniqueness_of(:name) }
+  end
+
   describe 'associations' do
     it { is_expected.to have_many(:users).through(:keyword_users) }
     it { is_expected.to have_many(:keyword_users).dependent(:destroy) }
