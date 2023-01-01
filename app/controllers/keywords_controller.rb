@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class KeywordsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
-    @keyword = Keyword.new(keyword_params)
+    @keyword = Keyword.find_or_create_by(name: keyword_params[:name])
     if @keyword.save
       redirect_to result_keyword_path(@keyword.name)
     else
