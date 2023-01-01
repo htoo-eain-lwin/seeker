@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CreateResultService < ApplicationService
+  URL = 'https://www.google.com'
+
   def initialize(keyword)
     @keyword = keyword
     super
@@ -9,7 +11,7 @@ class CreateResultService < ApplicationService
   def call
     return true if result_exists?
 
-    results = KeywordToResultsService.call(@keyword.name)
+    results = KeywordToResultsService.call(@keyword.name, URL)
     create_result(results)
   end
 
