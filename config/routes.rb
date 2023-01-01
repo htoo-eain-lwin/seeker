@@ -1,7 +1,11 @@
+# frozen_string_literal: true
+
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
-  get 'proxy', to: 'proxy#index'
+  mount Sidekiq::Web => '/jobs'
+
   get 'keywords/create'
-  get 'keyword/create'
   get 'dashboard', to: 'dashboard#index'
   resources :search, only: %i[new show] do
     post :upload, on: :collection
