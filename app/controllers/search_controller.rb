@@ -10,6 +10,7 @@ class SearchController < ApplicationController
   def upload
     @search = Search.new(search_params.merge!(user: current_user))
     if @search.valid? && @search.save
+      CreateKeywordsJob.perform_async(@search.id)
       redirect_to search_path(@search.id)
     else
       render 'new'
