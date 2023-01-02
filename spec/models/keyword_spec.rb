@@ -18,5 +18,7 @@ RSpec.describe Keyword, type: :model do
     it { is_expected.to have_many(:users).through(:keyword_users) }
     it { is_expected.to have_many(:keyword_users).dependent(:destroy) }
     it { is_expected.to have_one(:result).dependent(:destroy) }
+    it { is_expected.to have_many(:searches).through(:search_keywords) }
+    it { is_expected.to have_many(:search_keywords).dependent(:destroy) }
   end
 end
