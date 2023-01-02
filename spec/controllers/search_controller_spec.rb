@@ -24,15 +24,16 @@ describe SearchController, type: :controller do
   end
 
   describe 'Get Show' do
+    let(:search) { Fabricate.create(:search) }
+
     before :each do
       login_user
-      search = Fabricate.create(:search)
       get :show, params: { id: search.id }
     end
 
     it { expect(response).to have_http_status(:success) }
     it { is_expected.to render_template('show') }
-    it { expect(assigns(:search).class).to eq(Search) }
+    it { expect(assigns(:keywords)).to eq(search.keywords) }
   end
 
   describe 'POST Upload' do
