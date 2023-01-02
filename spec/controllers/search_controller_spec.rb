@@ -44,7 +44,7 @@ describe SearchController, type: :controller do
 
     before(:each) do
       login_user
-      allow(CreateKeywordsJob).to receive(:perform_async)
+      allow(CreateKeywordsAndResultsService).to receive(:call)
       post :upload, params: { search: { csv_file: file } }
     end
 
