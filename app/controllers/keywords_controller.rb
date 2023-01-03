@@ -4,7 +4,7 @@ class KeywordsController < ApplicationController
   before_action :authenticate_user!
 
   def result
-    keyword = Keyword.find_by name: params[:id]
+    keyword = Keyword.find_by id: params[:id]
     @result = keyword.result
   end
 
