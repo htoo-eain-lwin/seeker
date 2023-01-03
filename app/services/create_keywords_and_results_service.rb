@@ -53,9 +53,13 @@ class CreateKeywordsAndResultsService < ApplicationService
 
   private
 
+  def encode_url
+    URI.parse("#{@url}?q=#{@keywords[0]}&hl=en").to_s
+  end
+
   def init_search
     @browser.headers.set(HEDAERS)
-    @browser.go_to("#{@url}?q=#{@keywords[0]}&hl=en")
+    @browser.go_to(encode_url)
   end
 
   def act_like_human
