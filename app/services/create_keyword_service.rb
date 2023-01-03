@@ -10,11 +10,10 @@ class CreateKeywordService < ApplicationService
 
   def call
     return unless @search
-    return @keyword if @keyword
 
-    keyword = Keyword.create(name: @name)
-    @search.keywords << keyword
-    @search.user.keywords << keyword
-    keyword
+    @keyword ||= Keyword.create(name: @name)
+    @search.keywords << @keyword
+    @search.user.keywords << @keyword
+    @keyword
   end
 end

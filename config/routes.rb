@@ -5,6 +5,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/jobs'
 
+  get 'results', to: 'results#index'
   get 'dashboard', to: 'dashboard#index'
   resources :search, only: %i[new show] do
     post :upload, on: :collection
