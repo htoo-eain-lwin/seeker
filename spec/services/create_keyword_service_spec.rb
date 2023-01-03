@@ -14,7 +14,7 @@ RSpec.describe CreateKeywordService do
     it { expect { keyword_service }.not_to raise_error }
 
     context 'when existing keyword' do
-      it { expect(described_class.call(keyword.name, search.id)).to eq(keyword) }
+      it { expect(described_class.call(keyword.id, search.id)).to eq(keyword) }
     end
 
     context 'when new keyword' do
