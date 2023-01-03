@@ -2,9 +2,11 @@
 
 require 'rails_helper'
 
-describe CreateResultService do
+RSpec.describe CreateResultService do
+  subject(:result_service) { described_class.call(params) }
+
   let(:keyword) { Fabricate.create :keyword }
-  let(:results) do
+  let(:params) do
     {
       keyword_id: keyword.id,
       stats: "About #{rand(100_000..500_000)} results (#{rand(0.1..3).round(2)} seconds)",
@@ -17,14 +19,20 @@ describe CreateResultService do
   end
 
   describe 'call' do
-    before(:each) { allow(KeywordToResultsService).to receive(:call).and_return(results) }
+    it { expect { result_service }.not_to raise_error }
 
-    it { expect(described_class.call(keyword)).to be(true) }
-
-    it 'create new result' do
-      described_class.call(keyword)
-      keyword.reload
-      expect(keyword.result.present?).to be(true)
+    it 'save result' do
+      expect { result_service }.to change(Result, :count).by(1)
     end
+  end
+
+  describe 'file' do
+    it 'return io to attach' do
+      expect(described_class.new('foo').file('bar').class).to eq(StringIO)
+    end
+  end
+
+  describe 'file_name' do
+    it { expect(described_class.new('foo').file_name.class).to eq(String) }
   end
 end

@@ -1,1 +1,26 @@
-%h2= @keyword.name
+:ruby
+  nokogiri = Nokogiri::HTML(File.open(ActiveStorage::Blob.service.path_for(@result.html_file.key)))
+  urls = nokogiri.search('a').map{|i| i[:href]}
+  filtered_urls = urls.grep(/^https:\/\/www\.(?!google)/)
+
+%h2.mb-3
+  Result for Keyword:
+  %span.text-primary= @result.keyword.name
+.row.mb-3.d-flex.justify-content-center
+  .col-4.align-items-stretch
+    .card.h-100
+      .align-middle
+        .card-body
+          .card-title Column Chart
+          = column_chart ({ 'Total Urls': @result.total_urls,
+                            'Total Advertisers': @result.total_advertisers })
+  .col-5.align-items-stretch
+    .card
+      .card-body
+        .card-title Non Google Urls
+        %ul
+          - filtered_urls.each do |url|
+            %li
+              =link_to url, url, target: '_blank'
+
+

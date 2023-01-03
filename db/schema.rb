@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_31_112941) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_02_135227) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_31_112941) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_keywords_on_name", unique: true
   end
 
   create_table "results", force: :cascade do |t|
@@ -65,6 +66,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_31_112941) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["keyword_id"], name: "index_results_on_keyword_id"
+  end
+
+  create_table "search_keywords", force: :cascade do |t|
+    t.bigint "search_id"
+    t.bigint "keyword_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["keyword_id"], name: "index_search_keywords_on_keyword_id"
+    t.index ["search_id"], name: "index_search_keywords_on_search_id"
   end
 
   create_table "searches", force: :cascade do |t|
