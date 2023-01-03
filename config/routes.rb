@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :search, only: %i[new show] do
     post :upload, on: :collection
   end
-  resources :keywords, only: %i[show] do
+  resources :keywords, only: %i[index show] do
     get :result, on: :member
   end
   devise_for :users
