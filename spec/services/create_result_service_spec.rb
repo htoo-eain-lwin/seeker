@@ -28,11 +28,12 @@ RSpec.describe CreateResultService do
 
   describe 'file' do
     it 'return io to attach' do
-      expect(described_class.new('foo').file('bar').class).to eq(StringIO)
+      expect(described_class.new({ keyword_id: keyword.id })
+                            .file('bar').class).to eq(StringIO)
     end
   end
 
   describe 'file_name' do
-    it { expect(described_class.new('foo').file_name.class).to eq(String) }
+    it { expect(described_class.new({ keyword_id: keyword.id }).file_name.class).to eq(String) }
   end
 end

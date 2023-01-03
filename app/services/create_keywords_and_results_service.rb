@@ -31,13 +31,12 @@ class CreateKeywordsAndResultsService < ApplicationService
   end
 
   def create_keywords_and_results
+    raise YouAreABot, 'Detected By Google' if check_captcha_exists?
+
     @keywords.each_with_index do |key, index|
       keyword = CreateKeywordService.call(key, @search.id)
       google_search(keyword.name) unless index.zero?
-      CreateResultService.call(result_params(keyword.id)) if keyword.result.blank?
-    rescue Ferrum::NodeNotFoundError, NoMethodError
-      sleep 0.1
-      retry
+      CreateResultService.call(result_params(keyword.id))
     end
   end
 
@@ -72,11 +71,12 @@ class CreateKeywordsAndResultsService < ApplicationService
     clear_btn = @browser.at_xpath("//div[@aria-label='Clear']")
     clear_btn.click
     @browser.keyboard.type(keyword, :Enter)
+  rescue Ferrum::NodeNotFoundError
+    sleep 0.1
+    retry
   end
 
   def result_params(keyword_id)
-    raise YouAreABot, 'Detected By Google' if check_captcha_exists?
-
     {
       keyword_id: keyword_id,
       stats: stats,
@@ -84,6 +84,9 @@ class CreateKeywordsAndResultsService < ApplicationService
       total_advertisers: total_advertisers,
       html_file: @browser.body
     }
+  rescue Ferrum::NodeNotFoundError
+    sleep 0.1
+    retry
   end
 
   def check_captcha_exists?
@@ -92,6 +95,8 @@ class CreateKeywordsAndResultsService < ApplicationService
 
   def stats
     node = @browser.at_xpath("//div[@id='result-stats']")
+    raise Ferrum::NodeNotFoundError, 'node' unless node
+
     node.text
   end
 

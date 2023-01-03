@@ -10,7 +10,7 @@ class SearchController < ApplicationController
   def upload
     @search = Search.new(search_params.merge!(user: current_user))
     if @search.valid? && @search.save
-      CreateKeywordsAndResultsService.call(@search.id, current_user.id)
+      CreateKeywordsAndResultsService.call(@search.id)
       redirect_to search_path(@search.id)
     else
       render 'new'
