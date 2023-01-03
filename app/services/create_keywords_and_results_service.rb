@@ -34,7 +34,7 @@ class CreateKeywordsAndResultsService < ApplicationService
     @keywords.each_with_index do |key, index|
       keyword = CreateKeywordService.call(key, @search.id)
       google_search(keyword.name) unless index.zero?
-      create_result(keyword.id) if keyword.result.blank?
+      CreateResultService.call(result_params(keyword.id)) if keyword.result.blank?
     rescue Ferrum::NodeNotFoundError, NoMethodError
       sleep 0.1
       retry
@@ -47,17 +47,17 @@ class CreateKeywordsAndResultsService < ApplicationService
                         timeout: 100)
   end
 
-  def init_search
-    @browser.headers.set(HEDAERS)
-    @browser.go_to("#{@url}?q=#{@keywords[0]}&hl=en")
-  end
-
   def exit_browser
     @browser&.reset
     @browser&.quit
   end
 
   private
+
+  def init_search
+    @browser.headers.set(HEDAERS)
+    @browser.go_to("#{@url}?q=#{@keywords[0]}&hl=en")
+  end
 
   def act_like_human
     sleep rand(5)
@@ -74,13 +74,9 @@ class CreateKeywordsAndResultsService < ApplicationService
     @browser.keyboard.type(keyword, :Enter)
   end
 
-  def create_result(keyword_id)
+  def result_params(keyword_id)
     raise YouAreABot, 'Detected By Google' if check_captcha_exists?
 
-    CreateResultService.call(result_params(keyword_id))
-  end
-
-  def result_params(keyword_id)
     {
       keyword_id: keyword_id,
       stats: stats,
@@ -105,16 +101,5 @@ class CreateKeywordsAndResultsService < ApplicationService
 
   def total_advertisers
     @browser.xpath("//div[@data-text-ad='1']").count
-  end
-
-  def file(html_body)
-    io = StringIO.new
-    io.puts(html_body)
-    io.rewind
-    io
-  end
-
-  def file_name
-    "#{SecureRandom.uuid}.html"
   end
 end

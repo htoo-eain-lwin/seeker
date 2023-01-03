@@ -40,10 +40,6 @@ RSpec.describe CreateKeywordsAndResultsService do
     it { expect { service.set_browser }.not_to raise_error }
   end
 
-  describe 'init_search' do
-    it { expect { service.init_search }.not_to raise_error }
-  end
-
   describe 'exit_browser' do
     it { expect { service.exit_browser }.not_to raise_error }
   end
