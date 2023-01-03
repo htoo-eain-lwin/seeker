@@ -10,7 +10,7 @@ class Search < ApplicationRecord
 
   validates :csv_file, attached: true, content_type: :csv
 
-  def list_keywords
+  def keywords_from_file
     ApplicationController.helpers.list_keywords(csv_file)
   end
 end

@@ -17,9 +17,9 @@ RSpec.describe Search, type: :model do
     it { is_expected.to have_many(:search_keywords).dependent(:destroy) }
   end
 
-  describe '#list_keywords' do
+  describe '#keywords_from_file' do
     subject(:search) { Fabricate.create :search }
 
-    it { expect(search.list_keywords.class).to eq(Array) }
+    it { expect(search.keywords_from_file.class).to eq(Array) }
   end
 end
