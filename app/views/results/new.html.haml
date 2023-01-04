@@ -9,9 +9,14 @@
             .col-auto
               = turbo_frame_tag dom_id(@search) do
                 = simple_form_for @search,url: import_search_results_path(@search.id), method: :post do |form|
-                  = form.submit 'Start Import', class: 'btn btn-light border'
+                  = form.submit 'Click Here to Start Import', class: 'btn btn-primary'
     .card
       .card-body
         =  turbo_stream_from :keywords
         #keywords.row.d-flex-justify-content-between
           = render @keywords
+.row.text-center
+  .fs-6.text-secondary
+    You might find stacking in one keyword for more than 30s, it might be silently failing.
+    Sorry about that. You can see the imported result
+    %span= link_to 'Here', search_path(@search.id)
