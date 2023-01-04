@@ -2,7 +2,9 @@
 
 ## My First Crawler
 
-> * Using Ferrum::Browser to crawl data. Turbostreams to realtime update view and some charts, some search and of course API ...*
+> * Using Ferrum::Browser to crawl data. 
+> * Turbostreams to realtime update view and some charts, 
+> * Can Search, order and of course API ...*
 
 ## Documentation
 
