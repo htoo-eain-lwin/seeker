@@ -20,6 +20,7 @@ gem 'active_storage_validations' # ActiveStorage Validator
 gem "chartkick" # Create beautiful JavaScript charts with one line of Ruby
 gem 'ransack'
 gem 'doorkeeper', '5.4'
+gem 'view_component'
 
 gem 'jbuilder' # Build JSON APIs with ease
 gem 'redis' # Use Redis adapter to run Action Cable in production
