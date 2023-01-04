@@ -1,9 +1,9 @@
 [![Build Status](CI_BADGE_URL goes here)](REPO_URL goes here)
 
-## Introduction
+## My First Crawler
 
-> *App introduction goes here ...*
+> * Using Ferrum::Browser to crawl data. Turbostreams to realtime update view and some charts, some search and of course API ...*
 
 ## Documentation
 
-Please check out full documentation on the [wiki](../../wiki).
+
