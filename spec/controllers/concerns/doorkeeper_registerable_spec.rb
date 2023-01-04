@@ -17,7 +17,7 @@ describe DoorkeeperRegisterable do
 
     it 'render result' do
       result = Dummy.new.render_user(user, application)
-      expect(result.access_token).not_to be_nil
+      expect(result[:access_token]).not_to be_nil
     end
   end
 end
