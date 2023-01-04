@@ -7,5 +7,14 @@
 > * Can Search, order and of course API 
 > * Coverage. 279 / 343 LOC (81.34%) covered ...*
 ## Documentation
+> * git clone
+> * cd seeker
+> * bundle
+> * rails db:migrate
+> * rails db:seed
+>* ./bin/dev
+
+And You are good to go.
+
 
 
