@@ -1,0 +1,10 @@
+#flash-messages
+  - flashes.each do |type, msg|
+    .alert.alert-dismissible.fade.show.mt-3{ role: 'alert', class: class_name(type) }
+      %strong
+        %i.fa{ class: icon(type) }
+        #{humanize(type)}:
+      = msg
+      %button.btn-close{ type: 'button',
+        'data-bs-dismiss': 'alert',
+        'aria-label': 'Close' }
