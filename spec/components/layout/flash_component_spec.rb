@@ -12,7 +12,7 @@ RSpec.describe Layout::FlashComponent, type: :component do
     }.with_indifferent_access
   end
 
-  let(:component) { described_class.new(flash)}
+  let(:component) { described_class.new(flash) }
 
   it 'renders footer' do
     expect(render.css('.alert').count).to eq(2)
