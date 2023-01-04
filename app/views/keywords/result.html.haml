@@ -1,0 +1,47 @@
+:ruby
+  nokogiri = Nokogiri::HTML(File.open(ActiveStorage::Blob.service.path_for(@result.html_file.key)))
+  urls = nokogiri.search('a').map{|i| i[:href]}
+  filtered_urls = urls.grep(/^https\:\/\/(?!.*(google|search\?)).*$/)
+.row.d-flex.justify-content-between.mb-3
+  .col-auto
+    .fs-6
+      Result for Keyword:
+      %span.fs-2.text-primary #{@result.keyword.name}
+  .col-auto
+    .fs-6
+      Last Crawl At:
+      %span.fs-4.text-primary= time_ago_in_words(@result.updated_at)
+.row.mb-3.d-flex.justify-content-center
+  .col-md-4.align-items-stretch
+    .card.mb-3
+      .card-body
+        .card-title Column Chart
+        = column_chart ({ 'Total Urls': @result.total_urls,
+                          'Total Advertisers': @result.total_advertisers })
+
+    %ul.list-group.mb-3
+      %li.list-group-item
+        .fs-6.text-secondary
+          Stats:
+          %span.fs-5.text-primary #{@result.stats}
+      %li.list-group-item
+        .fs-6.text-secondary
+          Total Urls:
+          %span.fs-5.text-primary #{@result.total_urls}
+      %li.list-group-item
+        .fs-6.text-secondary
+          Total Advertisers:
+          %span.fs-5.text-primary #{@result.total_advertisers}
+      %li.list-group-item
+        %span.text-secondary HTML Body:
+        = link_to 'Download Here' ,rails_blob_path(@result.html_file, disposition: :attachment)
+  .col-md-5.align-items-stretch
+    .card
+      .card-body
+        .card-title Non Google Urls
+        %ul
+          - filtered_urls.each do |url|
+            %li
+              =link_to url, url, target: '_blank', class: 'text-decoration-none text-reset'
+
+

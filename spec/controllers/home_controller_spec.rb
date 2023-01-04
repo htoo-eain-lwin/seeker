@@ -7,8 +7,8 @@ describe HomeController, type: :controller do
     context 'when user is not logged in' do
       before(:each) { get :index }
 
-      it { expect(response).to have_http_status(:success) }
-      it { is_expected.to render_template('index') }
+      it { expect(response).to have_http_status(:redirect) }
+      it { is_expected.to redirect_to(new_user_session_path) }
     end
 
     context 'when user is logged in' do

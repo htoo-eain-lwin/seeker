@@ -1,0 +1,21 @@
+= simple_form_for :q, method: :get, wrapper: :inline_form do |f|
+  .row
+    .col-md-3.mb-3
+      = f.input :name_cont, label: 'Enter Keyword'
+    .col-md-3.mb-3
+      .row
+        .col-10
+          = f.input :created_at_gteq,
+                    label: 'From',
+                    as: 'date',
+                    html5: true
+    .col-md-3.mb-3
+      .row
+        .col-10
+          = f.input :created_at_lteq,
+                    label: 'To',
+                    as: 'date',
+                    html5: true
+    .col-md-3.d-flex.align-items-center
+      = f.button :submit, 'Search', class: 'btn btn-primary me-3'
+      = link_to 'Clear', results_path, class: 'btn btn-secondary'
