@@ -36,4 +36,22 @@ RSpec.describe CreateResultService do
   describe 'file_name' do
     it { expect(described_class.new({ keyword_id: keyword.id }).file_name.class).to eq(String) }
   end
+
+  # rubocop:disable RSpec/StubbedMock, RSpec/AnyInstance
+  context 'when result already exists' do
+    it 'update the result' do
+      result = Fabricate.create(:result, keyword: keyword)
+      keyword.result = result
+      keyword.save
+      expect_any_instance_of(described_class).to receive(:update_result).and_return(true)
+      result_service
+    end
+  end
+  # rubocop:enable RSpec/StubbedMock, RSpec/AnyInstance
+
+  context 'when result does not exists' do
+    it 'create the result' do
+      expect { result_service }.to change(Result, :count).by(1)
+    end
+  end
 end
