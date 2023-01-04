@@ -6,9 +6,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :email, presence: true
+  validates :email, presence: true, format: URI::MailTo::EMAIL_REGEXP
 
   has_many :searches, dependent: :destroy
   has_many :keyword_users, dependent: :destroy
   has_many :keywords, through: :keyword_users
+
+  def self.authenticate(email, password)
+    user = User.find_for_authentication(email: email)
+    user&.valid_password?(password) ? user : nil
+  end
 end

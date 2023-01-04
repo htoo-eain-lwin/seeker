@@ -1,11 +1,32 @@
+:ruby
+  total_keywords = @search.keywords_from_file
+  saved_keywords = @keywords
+  fail_to_save_keywords = total_keywords.count - saved_keywords.count
 .row.d-flex.justify-content-center.py-5
   .col-12.col-md-8
-    .card
+    .card.mb-3
+      .card-body
+        .card-title.mb-3
+          .row.d-flex.justify-content-center
+            .col-auto.border-end.d-flex.align-items-center
+              %h3 Import Summary
+            .col-6
+              %table.table
+                %thead.text-center
+                  %th Total
+                  %th.text-primary Saved
+                  %th.text-danger Failed
+                %tbody
+                  %tr.text-center
+                    %td= total_keywords.count
+                    %td= saved_keywords.count
+                    %td= fail_to_save_keywords
+    .card.mb-3
       .card-body
         .card-title.mb-3
           .row.d-flex.justify-content-between.align-items-center
             .col-auto
-              %h5.text-secondary Here's your keywords
+              .fs--5.text-secondary Here's your successfully saved keywords
             .col-auto
               %h5.text-secondary Total
               .ms-3=  @keywords.count
@@ -22,9 +43,4 @@
                 %th{ scope: 'row' } #{index +1}.
                 %td{ scope: 'row' }= keyword.name
                 %td{ scope: 'row' }
-<<<<<<< HEAD
-                  = link_to 'Show Result', result_keyword_path(keyword.name)
-=======
                   = link_to 'Show Result', result_keyword_path(keyword.id)
->>>>>>> c82c8b22b59b3e9f8cb6ae2337152b758b6bbf38
-
