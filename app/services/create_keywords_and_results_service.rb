@@ -31,12 +31,14 @@ class CreateKeywordsAndResultsService < ApplicationService
   end
 
   def create_keywords_and_results
-    raise YouAreABot, 'Detected By Google' if check_captcha_exists?
-
     @keywords.each_with_index do |key, index|
+      raise YouAreABot, 'Detected By Google' if check_captcha_exists?
+
       keyword = CreateKeywordService.call(key, @search.id)
       google_search(keyword.name) unless index.zero?
       CreateResultService.call(result_params(keyword.id))
+    rescue YouAreABot
+      next
     end
   end
 
