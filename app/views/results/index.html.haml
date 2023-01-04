@@ -13,11 +13,15 @@
       %thead
         %tr
           %th{ scope: 'col' } #
-          %th{ scope: 'col' } Keyword
-          %th{ scope: 'col' } Total Advertisers
-          %th{ scope: 'col' } Total Urls
+          %th{ scope: 'col' }
+            = sort_link(@q, :name, "Keyword", default_order: :desc)
+          %th{ scope: 'col' }
+            = sort_link(@q, :result_total_advertisers, "Total Advertisers", default_order: :desc)
+          %th{ scope: 'col' }
+            = sort_link(@q, :result_total_urls, "Total Urls", default_order: :desc)
           %th{ scope: 'col' } Stats
-          %th{ scope: 'col' } Created At
+          %th{ scope: 'col' }
+            = sort_link(@q, :created_at, "Created At", default_order: :desc)
       %tbody
         - @keywords.each_with_index do |keyword, index|
           %tr
