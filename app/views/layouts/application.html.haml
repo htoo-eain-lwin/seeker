@@ -20,4 +20,5 @@
               - else
                 %a.me-3{ href: new_user_registration_path } Register
                 %a.me-3{ href: new_user_session_path } Log In
+        = render Layout::FlashComponent.new(flash)
         = yield
