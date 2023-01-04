@@ -4,8 +4,8 @@
 
 > * Using Ferrum::Browser to crawl data. 
 > * Turbostreams to realtime update view and some charts, 
-> * Can Search, order and of course API ...*
-Coverage. 279 / 343 LOC (81.34%) covered
+> * Can Search, order and of course API 
+> * Coverage. 279 / 343 LOC (81.34%) covered ...*
 ## Documentation
 
 
