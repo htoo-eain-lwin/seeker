@@ -4,6 +4,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/jobs'
+  use_doorkeeper
 
   get 'results', to: 'results#index'
   get 'dashboard', to: 'dashboard#index'
@@ -21,4 +22,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+
+  draw :api
 end

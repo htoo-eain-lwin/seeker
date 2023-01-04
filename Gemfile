@@ -19,8 +19,9 @@ gem 'ferrum' #Ferrum::Browser to crawl url
 gem 'active_storage_validations' # ActiveStorage Validator
 gem "chartkick" # Create beautiful JavaScript charts with one line of Ruby
 gem 'ransack'
+gem 'doorkeeper', '5.4'
 
-# gem 'jbuilder' # Build JSON APIs with ease
+gem 'jbuilder' # Build JSON APIs with ease
 gem 'redis' # Use Redis adapter to run Action Cable in production
 # gem 'kredis' # Use Kredis to get higher-level data types in Redis
 # gem 'bcrypt' # Use Active Model has_secure_password

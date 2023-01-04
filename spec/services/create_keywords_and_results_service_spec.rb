@@ -9,7 +9,7 @@ RSpec.describe CreateKeywordsAndResultsService do
 
   let(:search) { Fabricate.create :search }
   let(:keyword) { Fabricate.create :keyword }
-  let(:url) { 'http://localhost:3000/test.html' }
+  let(:url) { URI.join('file:///', Rails.public_path.join('test.html').to_s) }
   let(:result) { Fabricate.create :result }
 
   describe 'call' do
