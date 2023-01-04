@@ -9,8 +9,25 @@ RSpec.describe Keyword, type: :model do
     end
   end
 
+  describe 'validation' do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_uniqueness_of(:name) }
+  end
+
+  # rubocop:disable RSpec/StubbedMock, RSpec/MessageSpies
+  describe 'callback' do
+    it 'call turbo after create' do
+      expect(Turbo::StreamsChannel).to receive(:broadcast_append_to).and_return(true)
+      Fabricate.create :keyword
+    end
+  end
+  # rubocop:enable RSpec/StubbedMock, RSpec/MessageSpies
+
   describe 'associations' do
     it { is_expected.to have_many(:users).through(:keyword_users) }
-    it { is_expected.to have_many(:keyword_users) }
+    it { is_expected.to have_many(:keyword_users).dependent(:destroy) }
+    it { is_expected.to have_one(:result).dependent(:destroy) }
+    it { is_expected.to have_many(:searches).through(:search_keywords) }
+    it { is_expected.to have_many(:search_keywords).dependent(:destroy) }
   end
 end
