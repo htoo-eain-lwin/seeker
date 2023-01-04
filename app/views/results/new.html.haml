@@ -1,0 +1,17 @@
+.row.d-flex.justify-content-center.py-5
+  .col-md-6
+    .card.mb-3
+      .card-body.pb-0
+        .card-title.mb-3
+          .row
+            .col-auto.d-flex.align-items-center
+              %h5.text-secondary.mb-0 Import your keywords
+            .col-auto
+              = turbo_frame_tag dom_id(@search) do
+                = simple_form_for @search,url: import_search_results_path(@search.id), method: :post do |form|
+                  = form.submit 'Start Import', class: 'btn btn-light border'
+    .card
+      .card-body
+        =  turbo_stream_from :keywords
+        #keywords.row.d-flex-justify-content-between
+          = render @keywords
