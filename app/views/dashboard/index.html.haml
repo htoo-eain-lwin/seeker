@@ -4,11 +4,7 @@
                              .order(Arel.sql("COUNT('keyword.id') desc"))
                              .limit(5)
                              .count
-<<<<<<< HEAD
-  search_with_most_keywords = Search.where(user_id: 1)
-=======
   search_with_most_keywords = Search.where(user_id: current_user.id)
->>>>>>> c82c8b22b59b3e9f8cb6ae2337152b758b6bbf38
                                     .joins(:search_keywords)
                                     .group(:search_id)
                                     .order(Arel.sql("COUNT('keyword.id') desc"))
@@ -24,11 +20,7 @@
     %h1 Dashboard
   .col-auto
     = link_to 'Upload File', new_search_path, class: 'btn btn-secondary'
-<<<<<<< HEAD
-    = link_to 'Search Keywords', keywords_path, class: 'btn btn-primary'
-=======
     = link_to 'Search Reports', results_path, class: 'btn btn-primary text-light'
->>>>>>> c82c8b22b59b3e9f8cb6ae2337152b758b6bbf38
 .row.d-flex.justify-content-center.py-5
   .col-md-10
     .row.justify-content-center
@@ -66,11 +58,7 @@
                   %tr
                     %td ##{keyword.id}
                     %td #{keyword.name}
-<<<<<<< HEAD
-                    %td= link_to 'View', result_keyword_path(id: keyword.name)
-=======
                     %td= link_to 'View', result_keyword_path(id: keyword.id)
->>>>>>> c82c8b22b59b3e9f8cb6ae2337152b758b6bbf38
       .col-md-4
         .card.mb-3
           .card-body
