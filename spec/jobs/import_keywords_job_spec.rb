@@ -3,8 +3,10 @@
 require 'rails_helper'
 require 'sidekiq/testing'
 
-RSpec.describe CreateResultsJob, type: :job do
-  subject(:job) { described_class.perform_async([]) }
+RSpec.describe ImportKeywordsJob, type: :job do
+  subject(:job) { described_class.perform_async(search.id) }
+
+  let(:search) { Fabricate.create(:search) }
 
   it 'queues the job' do
     expect { job }
@@ -18,11 +20,8 @@ RSpec.describe CreateResultsJob, type: :job do
 
   describe 'perform' do
     it 'executes perform' do
-      crawler = instance_double(SearchCrawler)
-      allow(SearchCrawler).to receive(:new).and_return(crawler)
-      allow(crawler).to receive(:results).and_return([])
-
-      described_class.new.perform([])
+      allow(CreateKeywordsAndResultsService).to receive(:call).and_return(true)
+      described_class.new.perform(search.id)
     end
   end
 end
