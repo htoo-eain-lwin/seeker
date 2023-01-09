@@ -8,6 +8,4 @@ class Keyword < ApplicationRecord
   has_many :searches, through: :search_keywords
 
   has_one :result, dependent: :destroy
-
-  after_create_commit -> { broadcast_append_to 'keywords' }
 end
