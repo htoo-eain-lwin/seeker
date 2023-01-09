@@ -55,7 +55,7 @@ class SearchCrawler
       act_like_human
       @results << result_params(keyword.id)
     rescue YouAreABot
-      next
+      break
     end
   end
 
