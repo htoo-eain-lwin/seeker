@@ -5,8 +5,8 @@ class Keyword < ApplicationRecord
 
   has_many :keyword_users, dependent: :destroy
   has_many :users, through: :keyword_users
-  # has_many :search_keywords, dependent: :destroy
-  # has_many :searches, through: :search_keywords
+
+  belongs_to :search
 
   # belongs_to :search
 
