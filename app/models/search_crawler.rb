@@ -3,9 +3,11 @@
 class SearchCrawler
   class YouAreABot < StandardError; end
   USER_AGENTS = [
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.79 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '\
+    'Chrome/104.0.5112.79 Safari/537.36',
     'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 '\
+    '(KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
     'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36'
   ].freeze
   HEADERS = {
@@ -30,9 +32,7 @@ class SearchCrawler
   end
 
   def user_agent_headers
-    {
-      'USER_AGENT' => USER_AGENTS.sample
-    }
+    { 'USER_AGENT' => USER_AGENTS.sample }
   end
 
   def results
