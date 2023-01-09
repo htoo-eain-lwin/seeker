@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   has_many :searches, dependent: :destroy
   has_many :keyword_users, dependent: :destroy
-  has_many :keywords, through: :keyword_users
+  has_many :keywords, dependent: :destroy
 
   def self.authenticate(email, password)
     user = User.find_for_authentication(email: email)

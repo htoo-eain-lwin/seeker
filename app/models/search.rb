@@ -3,8 +3,7 @@
 class Search < ApplicationRecord
   MAX_SIZE = 1
   has_one_attached :csv_file
-  has_many :search_keywords, dependent: :destroy
-  has_many :keywords, through: :search_keywords
+  has_many :keywords, dependent: :destroy
 
   belongs_to :user
 
