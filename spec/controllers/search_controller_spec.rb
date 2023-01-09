@@ -49,6 +49,6 @@ describe SearchController, type: :controller do
     end
 
     it { expect(response).to have_http_status(:redirect) }
-    it { expect(response).to redirect_to(new_search_result_path(Search.last.id)) }
+    it { expect(response).to redirect_to(search_path(Search.last.id)) }
   end
 end
