@@ -8,7 +8,7 @@ class CreateResultsJob
 
   def perform(keywords, url: nil)
     url ||= URL
-    crawler = SearchCrawler.new(keywords, url: url)
+    crawler = SearchCrawler.new(keywords, url)
     crawler.results.each do |result|
       CreateResultService.call(result)
     end
