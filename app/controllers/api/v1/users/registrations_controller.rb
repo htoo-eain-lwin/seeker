@@ -17,11 +17,16 @@ module Api
           if user.save
             render json: render_user(user, client_app), status: :ok
           else
-            render json: { errors: user.errors }, status: :unprocessable_entity
+            render json: { errors: error_message(user) }, status: :unprocessable_entity
           end
         end
 
         private
+
+        def error_message(user)
+          errors = user.errors.messages.dup
+          errors.each_key { |i| errors[i] = errors[i].join(', ') }
+        end
 
         def unauthorized_error
           render json: { error: I18n.t('doorkeeper.errors.messages.invalid_client') }, status: :unauthorized
