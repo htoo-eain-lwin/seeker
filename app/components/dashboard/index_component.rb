@@ -16,11 +16,10 @@ module Dashboard
     end
 
     def search_with_most_keywords
-      Search.where(user_id: @user.id)
-            .joins(:search_keywords)
-            .group(:search_id)
-            .order(Arel.sql("COUNT('keyword.id') desc"))
-            .limit(5).count
+      Keyword.where(search_id: @user.searches.pluck(:id))
+             .group(:search_id)
+             .order(Arel.sql("COUNT('keyword.id') desc"))
+             .limit(5).count
     end
 
     def top_ad_keywords

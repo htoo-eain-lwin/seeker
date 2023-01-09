@@ -2,4 +2,5 @@
 
 Fabricator(:keyword) do
   name { FFaker::Name.name }
+  search
 end
