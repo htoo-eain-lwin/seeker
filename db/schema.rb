@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_09_040007) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_09_052535) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -129,4 +129,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_040007) do
   add_foreign_key "keyword_users", "keywords"
   add_foreign_key "keyword_users", "users"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
+  add_foreign_key "results", "keywords"
+  add_foreign_key "search_keywords", "keywords"
+  add_foreign_key "search_keywords", "searches"
+  add_foreign_key "searches", "users"
 end
