@@ -45,8 +45,7 @@ RSpec.describe SearchCrawler do
     # rubocop:disable RSpec/MultipleExpectations, RSpec/ExampleLength
     it 'return results' do
       VCR.use_cassette('google') do
-        crawler = described_class.new([Fabricate.create(:keyword)], url)
-        results = crawler.results
+        results = described_class.new([Fabricate.create(:keyword)], url).results
         expect(results[0][:total_urls]).not_to be_nil
         expect(results[0][:total_advertisers]).not_to be_nil
         expect(results[0][:stats]).not_to be_nil
