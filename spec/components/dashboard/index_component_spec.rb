@@ -8,20 +8,6 @@ RSpec.describe Dashboard::IndexComponent, type: :component do
   let(:user) { Fabricate.create(:user) }
   let(:component) { described_class.new(user: user) }
 
-  describe '#top_keywords' do
-    let(:create_data) do
-      keyword = Fabricate.create(:keyword, name: 'FOO')
-      3.times { user.keywords << keyword }
-      other_key = Fabricate.create(:keyword, name: 'Bar')
-      user.keywords << other_key
-    end
-
-    it 'return key value pair' do
-      create_data
-      expect(component.top_keywords).to eq({ 'FOO' => 3, 'Bar' => 1 })
-    end
-  end
-
   describe '#search_with_most_keywords' do
     let(:create_data) do
       search = Fabricate.create(:search, user: user)

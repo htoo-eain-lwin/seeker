@@ -11,7 +11,6 @@ RSpec.describe Keyword, type: :model do
 
   describe 'validation' do
     it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_uniqueness_of(:name) }
   end
 
   # rubocop:disable RSpec/StubbedMock, RSpec/MessageSpies
@@ -24,8 +23,7 @@ RSpec.describe Keyword, type: :model do
   # rubocop:enable RSpec/StubbedMock, RSpec/MessageSpies
 
   describe 'associations' do
-    it { is_expected.to have_many(:users).through(:keyword_users) }
-    it { is_expected.to have_many(:keyword_users).dependent(:destroy) }
+    it { is_expected.to belong_to(:user) }
     it { is_expected.to have_one(:result).dependent(:destroy) }
     it { is_expected.to have_many(:searches).through(:search_keywords) }
     it { is_expected.to have_many(:search_keywords).dependent(:destroy) }

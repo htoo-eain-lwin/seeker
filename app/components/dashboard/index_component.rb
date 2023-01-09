@@ -7,14 +7,6 @@ module Dashboard
       super
     end
 
-    def top_keywords
-      @user.keywords
-           .group(:name)
-           .order(Arel.sql("COUNT('keyword.id') desc"))
-           .limit(5)
-           .count
-    end
-
     def search_with_most_keywords
       Search.where(user_id: @user.id)
             .joins(:search_keywords)
