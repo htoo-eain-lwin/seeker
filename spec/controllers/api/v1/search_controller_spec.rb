@@ -49,21 +49,42 @@ describe Api::V1::SearchController, type: :controller do
                          resource_owner_id: user.id)
       end
 
-      before(:each) do
-        request.headers[:Authorization] = "Bearer #{token.token}"
-        csv = File.read(Rails.root.join('spec', 'fixtures', 'files', 'test.csv'))
-        search_params = {
-          file: csv,
-          content_type: 'csv'
-        }
-        allow(ImportKeywordsJob).to receive(:perform_async).and_return(true)
-        post :upload, params: {
-          format: :json,
-          search: search_params
-        }
+      before(:each) { request.headers[:Authorization] = "Bearer #{token.token}" }
+
+      # rubocop:disable RSpec/NestedGroups
+      context 'when valid params' do
+        before(:each) do
+          csv = File.read(Rails.root.join('spec', 'fixtures', 'files', 'test.csv'))
+          search_params = {
+            file: csv,
+            content_type: 'csv'
+          }
+          allow(ImportKeywordsJob).to receive(:perform_async).and_return(true)
+          post :upload, params: {
+            format: :json,
+            search: search_params
+          }
+        end
+
+        it { expect(response).to have_http_status(:created) }
       end
 
-      it { expect(response).to have_http_status(:created) }
+      context 'when invalid params' do
+        before(:each) do
+          request.headers[:Authorization] = "Bearer #{token.token}"
+          search_params = {
+            file: nil,
+            content_type: 'txt'
+          }
+          post :upload, params: {
+            format: :json,
+            search: search_params
+          }
+        end
+
+        # rubocop:enable RSpec/NestedGroups
+        it { expect(response).to have_http_status(:unprocessable_entity) }
+      end
     end
   end
 end
