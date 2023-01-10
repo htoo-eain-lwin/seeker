@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_09_133954) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_10_141751) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_133954) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_keywords_on_user_id"
   end
 
@@ -79,7 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_133954) do
   end
 
   create_table "results", force: :cascade do |t|
-    t.bigint "keyword_id"
+    t.bigint "keyword_id", null: false
     t.string "stats"
     t.integer "total_urls"
     t.integer "total_advertisers"
@@ -89,8 +89,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_133954) do
   end
 
   create_table "search_keywords", force: :cascade do |t|
-    t.bigint "search_id"
-    t.bigint "keyword_id"
+    t.bigint "search_id", null: false
+    t.bigint "keyword_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["keyword_id"], name: "index_search_keywords_on_keyword_id"
@@ -98,7 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_133954) do
   end
 
   create_table "searches", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_searches_on_user_id"
