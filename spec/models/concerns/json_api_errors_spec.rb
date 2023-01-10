@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-class Dummy < ApplicationRecord
+class UserDummy < ApplicationRecord
   self.table_name = 'users'
   validates :email, presence: true
   include JsonApiErrors
@@ -10,7 +10,7 @@ end
 
 RSpec.describe JsonApiErrors do
   let(:model) do
-    Dummy.new
+    UserDummy.new
   end
 
   describe '.full_messages' do

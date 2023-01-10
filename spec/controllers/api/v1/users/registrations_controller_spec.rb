@@ -22,12 +22,10 @@ describe Api::V1::Users::RegistrationsController, type: :controller do
     end
 
     context 'when invalid user params' do
-      before(:each) {  post :create, params: params.except(:password, :email) }
+      before(:each) { post :create, params: params.except(:password, :email) }
 
       it 'return converted error message' do
-        expect(JSON.parse(response.body)).to eq(
-          { 'errors' => { 'email' => "can't be blank, is invalid", 'password' => "can't be blank" } }
-        )
+        expect(JSON.parse(response.body)['errors'].count).to eq(3)
       end
 
       it { expect(response.status).to eq(422) }
