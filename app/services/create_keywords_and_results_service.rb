@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class CreateKeywordsAndResultsService < ApplicationService
-  def initialize(search_id)
+  def initialize(search_id, keywords)
     @search = Search.find_by id: search_id
-    @keywords = CsvService.call(@search)
+    @keywords = keywords
     super
   end
 
