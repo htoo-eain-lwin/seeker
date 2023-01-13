@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   use_doorkeeper
 
   get 'dashboard', to: 'dashboard#index'
-  resources :search, only: %i[new show] do
+  resources :search, only: %i[new show create] do
     post :upload, on: :collection
   end
   resources :keywords, only: %i[index show] do
