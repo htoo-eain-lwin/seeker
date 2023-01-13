@@ -54,12 +54,14 @@ describe Api::V1::SearchController, type: :controller do
       # rubocop:disable RSpec/NestedGroups
       context 'when valid params' do
         before(:each) do
-          csv = File.read(Rails.root.join('spec', 'fixtures', 'files', 'test.csv'))
+          csv = Rack::Test::UploadedFile.new(
+            File.open(Rails.root.join('spec', 'fixtures', 'files', 'test.csv')), 'csv'
+          )
           search_params = {
             file: csv,
             content_type: 'csv'
           }
-          allow(ImportKeywordsJob).to receive(:perform_async).and_return(true)
+          allow(CreateKeywordsAndResultsService).to receive(:call).and_return(true)
           post :upload, params: {
             format: :json,
             search: search_params
@@ -69,12 +71,30 @@ describe Api::V1::SearchController, type: :controller do
         it { expect(response).to have_http_status(:created) }
       end
 
-      context 'when invalid params' do
+      context 'when invalid file' do
         before(:each) do
           request.headers[:Authorization] = "Bearer #{token.token}"
           search_params = {
             file: nil,
             content_type: 'txt'
+          }
+          post :upload, params: {
+            format: :json,
+            search: search_params
+          }
+        end
+
+        it { expect(response).to have_http_status(:unprocessable_entity) }
+      end
+
+      context 'when more than 100 keywords' do
+        before(:each) do
+          csv = Rack::Test::UploadedFile.new(
+            File.open(Rails.root.join('spec', 'fixtures', 'files', 'keywords.csv')), 'csv'
+          )
+          search_params = {
+            file: csv,
+            content_type: 'csv'
           }
           post :upload, params: {
             format: :json,
