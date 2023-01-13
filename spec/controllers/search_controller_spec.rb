@@ -44,11 +44,41 @@ describe SearchController, type: :controller do
 
     before(:each) do
       login_user
-      allow(CreateKeywordsAndResultsService).to receive(:call)
       post :upload, params: { search: { csv_file: file } }
     end
 
-    it { expect(response).to have_http_status(:redirect) }
-    it { expect(response).to redirect_to(search_path(Search.last.id)) }
+    it { expect(response).to have_http_status(:ok) }
+
+    context 'when invalid file with invalid extension' do
+      let(:file) do
+        Rack::Test::UploadedFile.new(
+          File.open(Rails.root.join('spec', 'fixtures', 'files', 'test.html')), 'html'
+        )
+      end
+
+      before(:each) do
+        login_user
+        post :upload, params: { search: { csv_file: file } }
+      end
+
+      it { expect(response).to have_http_status(:redirect) }
+      it { expect(response).to redirect_to(new_search_path) }
+    end
+
+    context 'when invalid file with more than 100+ keywords' do
+      let(:file) do
+        Rack::Test::UploadedFile.new(
+          File.open(Rails.root.join('spec', 'fixtures', 'files', 'keywords.csv')), 'csv'
+        )
+      end
+
+      before(:each) do
+        login_user
+        post :upload, params: { search: { csv_file: file } }
+      end
+
+      it { expect(response).to have_http_status(:redirect) }
+      it { expect(response).to redirect_to(new_search_path) }
+    end
   end
 end
