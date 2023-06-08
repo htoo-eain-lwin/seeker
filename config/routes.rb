@@ -6,15 +6,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/jobs'
   use_doorkeeper
 
-  get 'results', to: 'results#index'
   get 'dashboard', to: 'dashboard#index'
-  resources :search, only: %i[new show] do
+  resources :search, only: %i[new show create] do
     post :upload, on: :collection
-    resources :results, only: %i[new] do
-      post :import, on: :collection
-    end
   end
-  resources :keywords, only: %i[show] do
+  resources :keywords, only: %i[index show] do
     get :result, on: :member
   end
   devise_for :users

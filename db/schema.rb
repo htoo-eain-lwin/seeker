@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_04_034953) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_10_141751) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,20 +42,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_034953) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "keyword_users", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "keyword_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["keyword_id"], name: "index_keyword_users_on_keyword_id"
-    t.index ["user_id"], name: "index_keyword_users_on_user_id"
-  end
-
   create_table "keywords", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_keywords_on_name", unique: true
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_keywords_on_user_id"
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
@@ -87,7 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_034953) do
   end
 
   create_table "results", force: :cascade do |t|
-    t.bigint "keyword_id"
+    t.bigint "keyword_id", null: false
     t.string "stats"
     t.integer "total_urls"
     t.integer "total_advertisers"
@@ -97,8 +89,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_034953) do
   end
 
   create_table "search_keywords", force: :cascade do |t|
-    t.bigint "search_id"
-    t.bigint "keyword_id"
+    t.bigint "search_id", null: false
+    t.bigint "keyword_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["keyword_id"], name: "index_search_keywords_on_keyword_id"
@@ -106,7 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_034953) do
   end
 
   create_table "searches", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_searches_on_user_id"
@@ -126,5 +118,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_034953) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "keywords", "users"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
+  add_foreign_key "results", "keywords"
+  add_foreign_key "search_keywords", "keywords"
+  add_foreign_key "search_keywords", "searches"
+  add_foreign_key "searches", "users"
 end

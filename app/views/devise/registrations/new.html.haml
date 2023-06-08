@@ -11,8 +11,7 @@
             .col-auto
               %span or
               %span
-                = link_to "Sign In Here",
-                  new_user_session_path(resource_name)
+                = link_to "Sign In Here", new_user_session_path
         = simple_form_for resource,
                           url: registration_path(resource_name),
                           data: { turbo: false }  do |f|

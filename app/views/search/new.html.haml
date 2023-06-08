@@ -1,22 +1,22 @@
 .row.d-flex.justify-content-center.py-5
-  .col-12.col-md-8
-    .card
+  .col-md-6
+    .card.mb-3
       .card-body
-        .card-title Upload File
-        = form_with(model: @search, url: upload_search_index_path, local: true) do |form|
-          .mb-3
-            .dropzone.dz-clickable{ 'data-controller': 'dropzone',
-                                    'data-dropzone-max-file-size': Search::MAX_SIZE,
-                                    'data-dropzone-max-files': 1 }
-              = form.file_field :csv_file,
-                                name: 'search[csv_file]',
-                                direct_upload: true,
-                                data: { dropzone_target: 'input' }
-              .dz-message{ data: { dz_message: 'data-dz-message' } }
-                %h3.dropzone-msg-title
-                  %i.fa.fa-cloud-upload-alt
-                  Drag here to upload or click here to browse
-                %span.dropzone-msg-desc.text-sm
-                  #{Search::MAX_SIZE} MB file size maximum. Allowed only file type csv.
-          .mb-3
-            = form.submit value: 'Submit', class: 'btn btn-primary'
+        .card-title.mb-3
+          .row.justify-content-between
+            .col-auto
+              Upload CSV File
+            .col-auto
+              = link_to 'Download template', asset_path('/templates/template.csv'), download: true
+        = simple_form_for @search, url: upload_search_index_path do |f|
+          .row
+            .col-9.mb-3
+              = f.input :csv_file,
+                        as: :file,
+                        label: false,
+                        required: true,
+                        input_html: { class: 'btn btn-lg border', accept: '.csv' }
+            .col
+              = f.submit value: 'Upload', class: 'btn btn-light border btn-lg'
+
+    = turbo_frame_tag "keywords"

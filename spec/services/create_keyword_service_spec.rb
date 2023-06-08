@@ -8,7 +8,7 @@ RSpec.describe CreateKeywordService do
 
   let(:user) { Fabricate.create :user }
   let(:search) { Fabricate.create :search, user: user }
-  let(:keyword) { Fabricate.create :keyword }
+  let(:keyword) { Fabricate.create :keyword, user: user }
 
   describe 'call' do
     it { expect { keyword_service }.not_to raise_error }
@@ -21,7 +21,7 @@ RSpec.describe CreateKeywordService do
       it { expect(keyword_service.name).to eq('foo') }
 
       it 'save in users' do
-        expect(keyword_service.users.include?(user)).to be(true)
+        expect(keyword_service.user).to eq(user)
       end
 
       it 'save in search' do

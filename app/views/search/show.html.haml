@@ -1,5 +1,5 @@
 :ruby
-  total_keywords = @search.keywords_from_file
+  total_keywords = @search.keywords
   saved_keywords = @keywords
   fail_to_save_keywords = total_keywords.count - saved_keywords.count
 .row.d-flex.justify-content-center.py-5
@@ -43,4 +43,7 @@
                 %th{ scope: 'row' } #{index +1}.
                 %td{ scope: 'row' }= keyword.name
                 %td{ scope: 'row' }
-                  = link_to 'Show Result', result_keyword_path(keyword.id)
+                  - if keyword.result
+                    = link_to 'Show Result', result_keyword_path(keyword.id)
+                  - else
+                    = link_to 'Pending', '#'

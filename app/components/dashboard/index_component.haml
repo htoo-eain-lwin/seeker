@@ -3,21 +3,16 @@
     %h1 Dashboard
   .col-auto
     = link_to 'Upload File', new_search_path, class: 'btn btn-secondary'
-    = link_to 'Search Reports', results_path, class: 'btn btn-primary text-light'
+    = link_to 'Search Reports', keywords_path, class: 'btn btn-primary text-light'
 .row.d-flex.justify-content-center.py-5
   .col-md-10
     .row.justify-content-center
-      .col-md-4
+      .col-md-8
         .row.justify-content-center
           .card.mb-3
             .card-body
               .card-title Top advertised keywords
               = bar_chart top_ad_keywords
-      .col-md-4
-        .card.mb-3
-          .card-body
-            .card-title Top Search Keywords Chart
-            = pie_chart top_keywords
     .row.justify-content-center
       .col-md-4
         .card.mb-3
@@ -41,7 +36,10 @@
                   %tr
                     %td ##{keyword.id}
                     %td #{keyword.name}
-                    %td= link_to 'View', result_keyword_path(id: keyword.id)
+                    - if keyword.result
+                      %td= link_to 'View', result_keyword_path(id: keyword.id)
+                    - else
+                      %td= link_to 'Pending', '#'
       .col-md-4
         .card.mb-3
           .card-body

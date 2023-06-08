@@ -1,0 +1,18 @@
+#keywords
+  .card
+    .card-body
+      .card-title
+        .row.p-3
+          .col-7
+            %h3 Keywords from file
+          .col-auto
+            = simple_form_for @search, url: search_index_path, method: :post do |f|
+              = f.input :keywords, as: :hidden, input_html: { value: keywords.join(',') }
+              = f.submit value: 'Import', class: 'btn btn-lg btn-primary'
+      .row
+        - keywords.each do |keyword|
+          .col-md-6
+            %li= keyword
+    .card-footer
+      Total Keywords: #{keywords.count}
+
